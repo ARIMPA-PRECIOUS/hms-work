@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Billing System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f9;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 5px;
+        }
+        .total {
+            font-weight: bold;
+            background: #eaf4ff;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .history {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Hospital Billing System</h2>
+
+    <label>Patient Name:</label>
+    <input type="text" id="patientName">
+
+    <label>Consultation Fee:</label>
+    <input type="number" id="consultation" value="0">
+
+    <label>Lab Charges:</label>
+    <input type="number" id="lab" value="0">
+
+    <label>Medicine Charges:</label>
+    <input type="number" id="medicine" value="0">
+
+    <button onclick="generateBill()">Generate Bill</button>
+
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td>Consultation Fee</td>
+            <td id="cFee">0</td>
+        </tr>
+        <tr>
+            <td>Lab Charges</td>
+            <td id="lFee">0</td>
+        </tr>
+        <tr>
+            <td>Medicine Charges</td>
+            <td id="mFee">0</td>
+        </tr>
+        <tr class="total">
+            <td>Total</td>
+            <td id="total">0</td>
+        </tr>
+    </table>
+
+    <div class="history">
+        <h3>Payment History</h3>
+        <ul id="paymentHistory"></ul>
+    </div>
+</div>
+
+<script>
+function generateBill() {
+    let name = document.getElementById("patientName").value;
+    let consultation = parseFloat(document.getElementById("consultation").value) || 0;
+    let lab = parseFloat(document.getElementById("lab").value) || 0;
+    let medicine = parseFloat(document.getElementById("medicine").value) || 0;
+
+    let total = consultation + lab + medicine;
+
+    document.getElementById("cFee").innerText = consultation;
+    document.getElementById("lFee").innerText = lab;
+    document.getElementById("mFee").innerText = medicine;
+    document.getElementById("total").innerText = total;
+
+    let history = document.getElementById("paymentHistory");
+    let listItem = document.createElement("li");
+    listItem.innerText = "Patient: " + name + " | Total Paid: " + total;
+    history.appendChild(listItem);
+}
+</script>
+
+</body>
+</html>
